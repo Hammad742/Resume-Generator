@@ -1,0 +1,637 @@
+:root {
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --page-padding: 18mm;
+}
+
+.resume-paper {
+  background: white;
+  width: var(--page-width);
+  min-height: var(--page-height);
+  box-sizing: border-box;
+  padding: var(--page-padding); 
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 2rem;
+  transform-origin: top center;
+  position: relative;
+  font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+}
+
+@media (max-width: 1024px) {
+  .resume-paper:not(.pdf-export-mode) {
+    width: 100%;
+    max-width: 100%;
+    min-height: auto;
+    padding: 1rem;
+    transform: none !important;
+    margin: 0;
+  }
+}
+
+.section-card {
+  background: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.dynamic-item {
+  position: relative;
+  padding: 1rem;
+  padding-top: 2rem; /* Extra space for the remove button to prevent overlap */
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: #ef4444;
+  background: transparent;
+  border: none;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.remove-btn:hover {
+  background: #fee2e2;
+}
+
+/* Suggestion Dropdown */
+.suggestion-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 4px;
+}
+
+.suggestion-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  color: var(--text-main);
+}
+
+.suggestion-item:hover {
+  background: var(--bg-main);
+  color: var(--primary);
+}
+
+.suggestion-item:not(:last-child) {
+  border-bottom: 1px solid var(--bg-main);
+}
+
+/* Clear Input Button */
+.input-with-clear {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-clear input, 
+.input-with-clear textarea {
+  padding-right: 2.5rem; /* Space for the clear button */
+}
+
+.clear-input-btn {
+  position: absolute;
+  right: 0.75rem;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.input-with-clear:focus-within .clear-input-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+.visibility-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.visibility-btn:hover {
+  background: #f1f5f9;
+  color: var(--primary);
+}
+
+.section-hidden {
+  opacity: 0.6;
+  filter: grayscale(1);
+}
+
+.section-hidden .dynamic-item,
+.section-hidden .form-group {
+  pointer-events: none;
+}
+
+
+/* Skills Tag Input */
+.skills-tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: var(--bg-main);
+  min-height: 45px;
+  align-items: center;
+  max-width: 100%;
+}
+
+
+.skill-tag {
+  background: var(--primary);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 500;
+  animation: fadeIn 0.2s ease;
+}
+
+.skill-tag button {
+  background: transparent;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.skill-tag button:hover {
+  opacity: 1;
+}
+
+.tag-input {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  width: auto !important;
+  flex: 1;
+  min-width: 100px;
+  box-shadow: none !important;
+  height: 30px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Photo Upload */
+.photo-upload-area {
+  margin-top: 0.5rem;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.2s ease;
+  background: var(--bg-main);
+}
+
+.photo-upload-area:hover {
+  border-color: var(--primary);
+  background: var(--bg-card);
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.upload-placeholder span {
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.upload-placeholder small {
+  font-size: 0.75rem;
+}
+
+.photo-preview-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.photo-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  box-shadow: var(--shadow);
+  display: block;
+}
+
+.photo-edit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  z-index: 10;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.photo-preview-wrapper:hover .photo-edit-overlay {
+  opacity: 1;
+}
+
+
+.remove-photo-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+}
+
+.remove-photo-btn:hover {
+  transform: scale(1.1);
+  background: #dc2626;
+}
+
+/* Resume Photo */
+.resume-photo-container {
+  flex-shrink: 0;
+}
+
+.resume-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary);
+}
+
+@media (max-width: 640px) {
+  .resume-paper:not(.pdf-export-mode) header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem !important;
+  }
+}
+
+/* Modal & Cropper */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow-lg);
+}
+
+.cropper-viewport-wrapper {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  border: 4px solid var(--primary);
+  position: relative;
+  overflow: visible;
+}
+
+.cropper-viewport {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.cropper-viewport img.cropper-image {
+  max-width: none;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  transition: transform 0.1s ease-out;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.cropper-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 0 0 100px rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.cropper-controls {
+  display: flex;
+  flex-direction: column;
+}
+
+.zoom-slider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.zoom-slider input {
+  flex: 1;
+}
+
+
+
+
+.resume-section-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary);
+  display: inline-block;
+  letter-spacing: 0.05em;
+}
+
+.resume-summary {
+  font-size: 1.05rem;
+  color: #2d3748;
+  line-height: 1.7;
+  text-align: left;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  white-space: pre-line;
+}
+
+.resume-description {
+  font-size: 0.95rem;
+  color: #4a5568;
+  line-height: 1.6;
+  text-align: left;
+  margin-top: 0.4rem;
+  margin-bottom: 0.8rem;
+  white-space: pre-line;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.resume-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #718096;
+  margin-top: 0.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.resume-item-link {
+  font-size: 0.9rem;
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.resume-item-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+
+
+/* =========================================
+   PRINT STYLES FOR PDF GENERATION
+   ========================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0; /* Remove automatic print margins */
+  }
+
+  body {
+    background: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    margin: 0;
+    padding: 0;
+  }
+
+  .app-container {
+    display: block;
+    padding: 0;
+    margin: 0;
+    background: white;
+  }
+
+  .sidebar,
+  .top-bar,
+  .btn-primary {
+    display: none !important;
+  }
+
+  .preview-pane {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: none;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+
+
+  /* Page Break Controls */
+  .resume-section-title {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  section {
+    page-break-inside: auto;
+    break-inside: auto;
+    margin-bottom: 1.2rem !important;
+  }
+
+  .resume-summary,
+  .resume-description {
+    text-align: left !important;
+    line-height: 1.6 !important;
+    color: #222 !important;
+    margin-top: 0.3rem !important;
+    margin-bottom: 0.6rem !important;
+    font-size: 0.95rem !important;
+  }
+  
+  .resume-details {
+    color: #555 !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  .experience-item,
+  .project-item,
+  .certificate-item,
+  .education-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 1rem !important;
+  }
+
+  .compact-bottom {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Specific handling for grids/columns in print */
+  .left-column, .right-column {
+    display: block;
+    width: 100%;
+  }
+  
+
+}
+
+/* =========================================
+   CUSTOM PDF DOWNLOADER STYLES (html2pdf.js)
+   ========================================= */
+.pdf-export-mode {
+  box-shadow: none !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+/* Force page breaks to avoid splitting content */
+.pdf-export-mode .resume-section-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+.pdf-export-mode section {
+  page-break-inside: auto;
+  break-inside: auto;
+  margin-bottom: 1.2rem !important;
+}
+
+.pdf-export-mode .resume-section-title {
+  page-break-after: avoid;
+  break-after: avoid;
+  margin-top: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.pdf-export-mode .experience-item,
+.pdf-export-mode .project-item,
+.pdf-export-mode .education-item,
+.pdf-export-mode .certificate-item {
+  page-break-inside: avoid;
+  break-inside: avoid;
+  margin-bottom: 0.8rem !important;
+}
+
+.pdf-export-mode .compact-bottom {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.no-split {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
