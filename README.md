@@ -2,6 +2,9 @@
 
 A powerful, modern web application designed to help job seekers create professional, high-impact resumes with AI-driven ATS optimization.
 
+## 🔗 Live Demo
+Try the live app here: **[hammad-resume-generator.vercel.app](https://hammad-resume-generator.vercel.app/)**
+
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite)
